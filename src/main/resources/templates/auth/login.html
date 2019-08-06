@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <title>로그인</title>
+  <th:block th:replace="common/css :: css"></th:block>
+  <link rel="stylesheet" th:href="@{/static/css/login.css}"/>
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/login/process}" method="POST">
+  <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">로그인 해 주세요.</h1>
+  <label for="username" class="sr-only">아이디</label>
+  <input type="text" id="username" name="username" th:value="${username}" class="form-control mb-1" placeholder="아이디" required autofocus />
+  <label for="password" class="sr-only">비밀번호</label>
+  <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required />
+  <span th:if="${error}" class="field-error text-warning" th:text="${error}"></span>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> 자동 로그인
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+</form>
+<th:block th:replace="common/js :: js"></th:block>
+</body>
+</html>

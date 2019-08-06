@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="menu">
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a th:href="@{/}">Userinsight Edu</a></h5>
+    <nav class="my-2 my-md-0 mr-md-3" sec:authorize="hasRole('ROLE_MANAGE_USER')">
+      <a class="p-2 text-dark" th:href="@{/user/list}">사용자 관리</a>
+    </nav>
+    <nav class="my-2 my-md-0 mr-md-3" sec:authorize="hasRole('ROLE_MANAGE_DEPARTMENT')">
+      <a class="p-2 text-dark" th:href="@{/department/list}">부서 관리</a>
+    </nav>
+    <nav class="my-2 my-md-0 mr-md-3" sec:authorize="hasRole('ROLE_MANAGE_NOTICE')">
+      <a class="p-2 text-dark" th:href="@{/notice/list}">공지사항</a>
+    </nav>
+    <nav class="my-2 my-md-0 mr-md-3" sec:authorize="hasRole('ROLE_MANAGE_FREEBOARD')">
+      <a class="p-2 text-dark" th:href="@{/freeboard/list}">자유게시판</a>
+    </nav>
+    <span class="badge badge-primary" th:text="${#authentication.principal.name} + ' / ' + ${#authentication.principal.department?.name}"></span>
+    <a class="btn btn-outline-primary ml-3" th:href="@{/logout}">로그아웃</a>
+  </div>
+</th:block>
+</body>
+</html>

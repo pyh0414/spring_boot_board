@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data" lang="ko">
+<head>
+  <title>메인</title>
+  <th:block th:replace="common/css :: css"></th:block>
+</head>
+<body>
+<th:block th:replace="common/menu :: menu"></th:block>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">사용자 목록</h1>
+</div>
+
+<div class="container">
+
+  <form action="" method="post" class="data-list" th:attr="data-url=@{/user/}">
+    <div class="text-right">
+      <a th:href="@{/user/edit}" class="btn btn-primary">추가</a>
+      <a class="btn btn-primary btn-action btn-require-selected disabled mr-1" disabled="disabled" data-action="delete">
+        <i class="fa fa-trash"></i>삭제
+      </a>
+    </div>
+
+    <div class="mb-1">
+      <span sd:page-size-selector="javascript"></span>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th style="width: 32px">
+            <div class="form-check my-0">
+              <label class="form-check-label ml-3">
+                <input type="checkbox" class="form-check-input form-check-all"/>
+              </label>
+            </div>
+          </th>
+          <th><a sd:pagination-sort="id">ID</a></th>
+          <th><a sd:pagination-sort="name">이름</a></th>
+          <th><a>부서</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="i : ${users}">
+          <td>
+            <div class="form-check my-0">
+              <label class="form-check-label ml-3">
+                <input type="checkbox" class="form-check-input not-removable" name="ids" th:value="${i.id}"/>
+              </label>
+            </div>
+          </td>
+          <td th:text="${i.id}"></td>
+          <td><a th:href="@{/user/edit/{id}(id=${i.id})}" th:text="${i.name}"></a></td>
+          <td th:text="${i.department?.getName()}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div sd:pagination-summary="">info</div>
+      </div>
+      <div class="col-sm-6">
+        <nav class="pull-right">
+          <ul class="pagination" sd:pagination-split="7" sd:pagination="full">
+            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </form>
+</div>
+<th:block th:replace="common/js :: js"></th:block>
+</body>
+</html>

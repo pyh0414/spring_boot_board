@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data" lang="ko">
+<head>
+  <title>메인</title>
+  <th:block th:replace="common/css :: css"></th:block>
+</head>
+<body>
+<th:block th:replace="common/menu :: menu"></th:block>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">공지사항</h1>
+  <p th:text="${#authentication.principal.name}"></p>
+</div>
+
+<div class="container">
+  <p>공지사항</p>
+
+</div>
+<th:block th:replace="common/js :: js"></th:block>
+</body>
+</html>
